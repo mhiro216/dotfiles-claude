@@ -1,0 +1,19 @@
+# ホワイトリスト方式: 既定ですべて無視し、移植したいものだけを明示的に許可する。
+# これにより history / sessions / cache / token類を誤ってpushする事故を防ぐ。
+*
+
+# --- 同期対象として明示的に許可するもの ---
+!.gitignore
+!README.md
+!install.sh
+
+!CLAUDE.md
+!statusline.sh
+!settings.json
+!settings.local.json
+
+!skills/
+!skills/**
+
+!memory/
+!memory/**
