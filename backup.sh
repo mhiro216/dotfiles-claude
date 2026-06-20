@@ -11,10 +11,10 @@ set -euo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO_DIR"
 
-git pull -q --rebase origin main || true
-
 if git diff --quiet && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
-  echo "変更なし。push不要。"
+  echo "ローカル変更なし。リモート取り込みのみ実施。"
+  git pull -q --rebase origin main
+  echo "最新: $(git rev-parse --short HEAD)"
   exit 0
 fi
 
@@ -22,7 +22,9 @@ NOTE="${1:-}"
 MSG="backup: $(date '+%Y-%m-%d %H:%M:%S')"
 [ -n "$NOTE" ] && MSG="$MSG — $NOTE"
 
+# 先にローカル変更を commit してから rebase で取り込む(unstaged 競合を避ける)
 git add -A
 git commit -q -m "$MSG"
+git pull -q --rebase origin main
 git push -q origin main
 echo "push 完了: $(git rev-parse --short HEAD) ($MSG)"
