@@ -11,6 +11,12 @@
 #
 set -euo pipefail
 
+# Windows の Git Bash では MSYS 未設定だと `ln -s` が実体コピーにフォールバックし、
+# 同期の狙い(~/.claude 側はリンク)が壊れる。本物のシンボリックリンクを強制する。
+# ※ native なリンク作成には Windows の「開発者モード」または管理者権限が必要。
+#   非対応環境では link 作成時に明示的に失敗する(nativestrict のため黙ってコピーしない)。
+export MSYS=winsymlinks:nativestrict
+
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
 STAMP="$(date +%Y%m%d-%H%M%S)"
