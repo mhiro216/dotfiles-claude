@@ -1,5 +1,7 @@
 # Memory Index
 
+- [Backup dotfiles-claude](backup-dotfiles-claude.md) — 「メモリ/設定をバックアップして」で ~/dotfiles-claude を main へ直 push(backup.sh)
+
 - [X post from article](x-post-from-article.md) — how to summarize a given article into a CTO-voice X post for AI engineers
 - [No decrypt protected files](no-decrypt-protected-files.md) — don't auto-decrypt encrypted files; ask the user for the content
 - [Note article style](note-article-style.md) — style/tone guide for drafting note.com articles in the user's (Nishika CTO) voice
